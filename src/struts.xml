@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<!--  <constant name="struts.action.extension" value="action" />
+ <constant name="struts.i18n.encoding" value="UTF-8" />
+ <constant name="struts.devMode" value="true" />
+ <constant name="struts.multipart.maxSize" value="52428800" />
+ <constant name="struts.enable.SlashesInActionNames" value="true" />
+ <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+ <constant name="struts.custom.i18n.resources" value="resource/message_zh_CN" /> -->
+ 
+ <!-- 请求格式：namespace/action
+  package：包
+   * name：包名，唯一的，必选项
+   * namespace：命名空间，唯一的，相当于房间号。可选项，省略情况下是"/"。页面中请求连接的前半部分
+   * extends：继承
+   * extends="struts-default"：struts2框架底层提供的核心包struts2-core-2.3.3.jar下的struts-default.xml文件
+   * 为什么要继承这个struts-default.xml文件？
+   * 因为struts2框架底层提供的struts-default.xml声明了所有的拦截器和拦截器栈，
+    知道在struts2框架运行时执行struts-default.xml文件中的拦截器栈。
+   * 如果不继承struts-default.xml文件，就没有办法使用struts2框架提供的所有拦截器
+  -->
+ <package name="gptest" namespace="/" extends="struts-default">
+
+  	<action name="demo1" class="cn.action.Useraction">
+        <result name="success">/yes.jsp</result>
+  	</action>
+  	
+  	<action name="demo2" class="cn.action.DemoAction"
+		method="demo2">
+            <result name="success">/yes.jsp</result>
+    </action>
+  	
+  	<action name="*_*" class="cn.action.DemoAction"
+		method="{1}">
+            <result name="success">/{2}.jsp</result>
+    </action>
+  
+ </package>
+</struts>

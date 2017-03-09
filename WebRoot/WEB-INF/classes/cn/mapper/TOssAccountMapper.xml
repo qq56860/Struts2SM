@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.mapper.TOssAccountMapper" >
+  <resultMap id="BaseResultMap" type="cn.domain.TOssAccount" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="adpter_id" property="adpterId" jdbcType="VARCHAR" />
+    <result column="u_phone" property="uPhone" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="enterprise_num" property="enterpriseNum" jdbcType="VARCHAR" />
+    <result column="m_phone" property="mPhone" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_code" property="enterpriseCode" jdbcType="VARCHAR" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="bill_type" property="billType" jdbcType="VARCHAR" />
+    <result column="license_type" property="licenseType" jdbcType="VARCHAR" />
+    <result column="yqt_license" property="yqtLicense" jdbcType="INTEGER" />
+    <result column="rest_amount" property="restAmount" jdbcType="INTEGER" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="adr_license" property="adrLicense" jdbcType="INTEGER" />
+    <result column="is_open_sms" property="isOpenSms" jdbcType="VARCHAR" />
+    <result column="boss_machine_type" property="bossMachineType" jdbcType="VARCHAR" />
+    <result column="boss_area_code" property="bossAreaCode" jdbcType="VARCHAR" />
+    <result column="boss_number" property="bossNumber" jdbcType="VARCHAR" />
+    <result column="outbound" property="outbound" jdbcType="VARCHAR" />
+    <result column="ChinaMobile_boss_number" property="chinamobileBossNumber" jdbcType="VARCHAR" />
+    <result column="ChinaMobile_relay_number" property="chinamobileRelayNumber" jdbcType="VARCHAR" />
+    <result column="ChinaUnicom_boss_number" property="chinaunicomBossNumber" jdbcType="VARCHAR" />
+    <result column="ChinaUnicom_relay_number" property="chinaunicomRelayNumber" jdbcType="VARCHAR" />
+    <result column="ChinaTelecom_boss_number" property="chinatelecomBossNumber" jdbcType="VARCHAR" />
+    <result column="ChinaTelecom_relay_number" property="chinatelecomRelayNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, adpter_id, u_phone, enterprise_name, enterprise_num, m_phone, account_type, create_time, 
+    enterprise_code, m_name, bill_type, license_type, yqt_license, rest_amount, start_date, 
+    end_date, adr_license, is_open_sms, boss_machine_type, boss_area_code, boss_number, 
+    outbound, ChinaMobile_boss_number, ChinaMobile_relay_number, ChinaUnicom_boss_number, 
+    ChinaUnicom_relay_number, ChinaTelecom_boss_number, ChinaTelecom_relay_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.domain.TOssAccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_oss_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_oss_account
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_oss_account
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.domain.TOssAccountExample" >
+    delete from t_oss_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.domain.TOssAccount" >
+    insert into t_oss_account (id, adpter_id, u_phone, 
+      enterprise_name, enterprise_num, m_phone, 
+      account_type, create_time, enterprise_code, 
+      m_name, bill_type, license_type, 
+      yqt_license, rest_amount, start_date, 
+      end_date, adr_license, is_open_sms, 
+      boss_machine_type, boss_area_code, boss_number, 
+      outbound, ChinaMobile_boss_number, ChinaMobile_relay_number, 
+      ChinaUnicom_boss_number, ChinaUnicom_relay_number, 
+      ChinaTelecom_boss_number, ChinaTelecom_relay_number
+      )
+    values (#{id,jdbcType=VARCHAR}, #{adpterId,jdbcType=VARCHAR}, #{uPhone,jdbcType=VARCHAR}, 
+      #{enterpriseName,jdbcType=VARCHAR}, #{enterpriseNum,jdbcType=VARCHAR}, #{mPhone,jdbcType=VARCHAR}, 
+      #{accountType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{enterpriseCode,jdbcType=VARCHAR}, 
+      #{mName,jdbcType=VARCHAR}, #{billType,jdbcType=VARCHAR}, #{licenseType,jdbcType=VARCHAR}, 
+      #{yqtLicense,jdbcType=INTEGER}, #{restAmount,jdbcType=INTEGER}, #{startDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP}, #{adrLicense,jdbcType=INTEGER}, #{isOpenSms,jdbcType=VARCHAR}, 
+      #{bossMachineType,jdbcType=VARCHAR}, #{bossAreaCode,jdbcType=VARCHAR}, #{bossNumber,jdbcType=VARCHAR}, 
+      #{outbound,jdbcType=VARCHAR}, #{chinamobileBossNumber,jdbcType=VARCHAR}, #{chinamobileRelayNumber,jdbcType=VARCHAR}, 
+      #{chinaunicomBossNumber,jdbcType=VARCHAR}, #{chinaunicomRelayNumber,jdbcType=VARCHAR}, 
+      #{chinatelecomBossNumber,jdbcType=VARCHAR}, #{chinatelecomRelayNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.domain.TOssAccount" >
+    insert into t_oss_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adpterId != null" >
+        adpter_id,
+      </if>
+      <if test="uPhone != null" >
+        u_phone,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="enterpriseNum != null" >
+        enterprise_num,
+      </if>
+      <if test="mPhone != null" >
+        m_phone,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="enterpriseCode != null" >
+        enterprise_code,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="billType != null" >
+        bill_type,
+      </if>
+      <if test="licenseType != null" >
+        license_type,
+      </if>
+      <if test="yqtLicense != null" >
+        yqt_license,
+      </if>
+      <if test="restAmount != null" >
+        rest_amount,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="adrLicense != null" >
+        adr_license,
+      </if>
+      <if test="isOpenSms != null" >
+        is_open_sms,
+      </if>
+      <if test="bossMachineType != null" >
+        boss_machine_type,
+      </if>
+      <if test="bossAreaCode != null" >
+        boss_area_code,
+      </if>
+      <if test="bossNumber != null" >
+        boss_number,
+      </if>
+      <if test="outbound != null" >
+        outbound,
+      </if>
+      <if test="chinamobileBossNumber != null" >
+        ChinaMobile_boss_number,
+      </if>
+      <if test="chinamobileRelayNumber != null" >
+        ChinaMobile_relay_number,
+      </if>
+      <if test="chinaunicomBossNumber != null" >
+        ChinaUnicom_boss_number,
+      </if>
+      <if test="chinaunicomRelayNumber != null" >
+        ChinaUnicom_relay_number,
+      </if>
+      <if test="chinatelecomBossNumber != null" >
+        ChinaTelecom_boss_number,
+      </if>
+      <if test="chinatelecomRelayNumber != null" >
+        ChinaTelecom_relay_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="adpterId != null" >
+        #{adpterId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPhone != null" >
+        #{uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNum != null" >
+        #{enterpriseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhone != null" >
+        #{mPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseCode != null" >
+        #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        #{billType,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseType != null" >
+        #{licenseType,jdbcType=VARCHAR},
+      </if>
+      <if test="yqtLicense != null" >
+        #{yqtLicense,jdbcType=INTEGER},
+      </if>
+      <if test="restAmount != null" >
+        #{restAmount,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adrLicense != null" >
+        #{adrLicense,jdbcType=INTEGER},
+      </if>
+      <if test="isOpenSms != null" >
+        #{isOpenSms,jdbcType=VARCHAR},
+      </if>
+      <if test="bossMachineType != null" >
+        #{bossMachineType,jdbcType=VARCHAR},
+      </if>
+      <if test="bossAreaCode != null" >
+        #{bossAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bossNumber != null" >
+        #{bossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="outbound != null" >
+        #{outbound,jdbcType=VARCHAR},
+      </if>
+      <if test="chinamobileBossNumber != null" >
+        #{chinamobileBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinamobileRelayNumber != null" >
+        #{chinamobileRelayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinaunicomBossNumber != null" >
+        #{chinaunicomBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinaunicomRelayNumber != null" >
+        #{chinaunicomRelayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinatelecomBossNumber != null" >
+        #{chinatelecomBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinatelecomRelayNumber != null" >
+        #{chinatelecomRelayNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.domain.TOssAccountExample" resultType="java.lang.Integer" >
+    select count(*) from t_oss_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_oss_account
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adpterId != null" >
+        adpter_id = #{record.adpterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uPhone != null" >
+        u_phone = #{record.uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseName != null" >
+        enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseNum != null" >
+        enterprise_num = #{record.enterpriseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mPhone != null" >
+        m_phone = #{record.mPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountType != null" >
+        account_type = #{record.accountType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseCode != null" >
+        enterprise_code = #{record.enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mName != null" >
+        m_name = #{record.mName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billType != null" >
+        bill_type = #{record.billType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseType != null" >
+        license_type = #{record.licenseType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yqtLicense != null" >
+        yqt_license = #{record.yqtLicense,jdbcType=INTEGER},
+      </if>
+      <if test="record.restAmount != null" >
+        rest_amount = #{record.restAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adrLicense != null" >
+        adr_license = #{record.adrLicense,jdbcType=INTEGER},
+      </if>
+      <if test="record.isOpenSms != null" >
+        is_open_sms = #{record.isOpenSms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bossMachineType != null" >
+        boss_machine_type = #{record.bossMachineType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bossAreaCode != null" >
+        boss_area_code = #{record.bossAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bossNumber != null" >
+        boss_number = #{record.bossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outbound != null" >
+        outbound = #{record.outbound,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chinamobileBossNumber != null" >
+        ChinaMobile_boss_number = #{record.chinamobileBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chinamobileRelayNumber != null" >
+        ChinaMobile_relay_number = #{record.chinamobileRelayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chinaunicomBossNumber != null" >
+        ChinaUnicom_boss_number = #{record.chinaunicomBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chinaunicomRelayNumber != null" >
+        ChinaUnicom_relay_number = #{record.chinaunicomRelayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chinatelecomBossNumber != null" >
+        ChinaTelecom_boss_number = #{record.chinatelecomBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chinatelecomRelayNumber != null" >
+        ChinaTelecom_relay_number = #{record.chinatelecomRelayNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_oss_account
+    set id = #{record.id,jdbcType=VARCHAR},
+      adpter_id = #{record.adpterId,jdbcType=VARCHAR},
+      u_phone = #{record.uPhone,jdbcType=VARCHAR},
+      enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      enterprise_num = #{record.enterpriseNum,jdbcType=VARCHAR},
+      m_phone = #{record.mPhone,jdbcType=VARCHAR},
+      account_type = #{record.accountType,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      enterprise_code = #{record.enterpriseCode,jdbcType=VARCHAR},
+      m_name = #{record.mName,jdbcType=VARCHAR},
+      bill_type = #{record.billType,jdbcType=VARCHAR},
+      license_type = #{record.licenseType,jdbcType=VARCHAR},
+      yqt_license = #{record.yqtLicense,jdbcType=INTEGER},
+      rest_amount = #{record.restAmount,jdbcType=INTEGER},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      adr_license = #{record.adrLicense,jdbcType=INTEGER},
+      is_open_sms = #{record.isOpenSms,jdbcType=VARCHAR},
+      boss_machine_type = #{record.bossMachineType,jdbcType=VARCHAR},
+      boss_area_code = #{record.bossAreaCode,jdbcType=VARCHAR},
+      boss_number = #{record.bossNumber,jdbcType=VARCHAR},
+      outbound = #{record.outbound,jdbcType=VARCHAR},
+      ChinaMobile_boss_number = #{record.chinamobileBossNumber,jdbcType=VARCHAR},
+      ChinaMobile_relay_number = #{record.chinamobileRelayNumber,jdbcType=VARCHAR},
+      ChinaUnicom_boss_number = #{record.chinaunicomBossNumber,jdbcType=VARCHAR},
+      ChinaUnicom_relay_number = #{record.chinaunicomRelayNumber,jdbcType=VARCHAR},
+      ChinaTelecom_boss_number = #{record.chinatelecomBossNumber,jdbcType=VARCHAR},
+      ChinaTelecom_relay_number = #{record.chinatelecomRelayNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.domain.TOssAccount" >
+    update t_oss_account
+    <set >
+      <if test="adpterId != null" >
+        adpter_id = #{adpterId,jdbcType=VARCHAR},
+      </if>
+      <if test="uPhone != null" >
+        u_phone = #{uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNum != null" >
+        enterprise_num = #{enterpriseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhone != null" >
+        m_phone = #{mPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseCode != null" >
+        enterprise_code = #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        bill_type = #{billType,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseType != null" >
+        license_type = #{licenseType,jdbcType=VARCHAR},
+      </if>
+      <if test="yqtLicense != null" >
+        yqt_license = #{yqtLicense,jdbcType=INTEGER},
+      </if>
+      <if test="restAmount != null" >
+        rest_amount = #{restAmount,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adrLicense != null" >
+        adr_license = #{adrLicense,jdbcType=INTEGER},
+      </if>
+      <if test="isOpenSms != null" >
+        is_open_sms = #{isOpenSms,jdbcType=VARCHAR},
+      </if>
+      <if test="bossMachineType != null" >
+        boss_machine_type = #{bossMachineType,jdbcType=VARCHAR},
+      </if>
+      <if test="bossAreaCode != null" >
+        boss_area_code = #{bossAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bossNumber != null" >
+        boss_number = #{bossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="outbound != null" >
+        outbound = #{outbound,jdbcType=VARCHAR},
+      </if>
+      <if test="chinamobileBossNumber != null" >
+        ChinaMobile_boss_number = #{chinamobileBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinamobileRelayNumber != null" >
+        ChinaMobile_relay_number = #{chinamobileRelayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinaunicomBossNumber != null" >
+        ChinaUnicom_boss_number = #{chinaunicomBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinaunicomRelayNumber != null" >
+        ChinaUnicom_relay_number = #{chinaunicomRelayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinatelecomBossNumber != null" >
+        ChinaTelecom_boss_number = #{chinatelecomBossNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chinatelecomRelayNumber != null" >
+        ChinaTelecom_relay_number = #{chinatelecomRelayNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.domain.TOssAccount" >
+    update t_oss_account
+    set adpter_id = #{adpterId,jdbcType=VARCHAR},
+      u_phone = #{uPhone,jdbcType=VARCHAR},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      enterprise_num = #{enterpriseNum,jdbcType=VARCHAR},
+      m_phone = #{mPhone,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enterprise_code = #{enterpriseCode,jdbcType=VARCHAR},
+      m_name = #{mName,jdbcType=VARCHAR},
+      bill_type = #{billType,jdbcType=VARCHAR},
+      license_type = #{licenseType,jdbcType=VARCHAR},
+      yqt_license = #{yqtLicense,jdbcType=INTEGER},
+      rest_amount = #{restAmount,jdbcType=INTEGER},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      adr_license = #{adrLicense,jdbcType=INTEGER},
+      is_open_sms = #{isOpenSms,jdbcType=VARCHAR},
+      boss_machine_type = #{bossMachineType,jdbcType=VARCHAR},
+      boss_area_code = #{bossAreaCode,jdbcType=VARCHAR},
+      boss_number = #{bossNumber,jdbcType=VARCHAR},
+      outbound = #{outbound,jdbcType=VARCHAR},
+      ChinaMobile_boss_number = #{chinamobileBossNumber,jdbcType=VARCHAR},
+      ChinaMobile_relay_number = #{chinamobileRelayNumber,jdbcType=VARCHAR},
+      ChinaUnicom_boss_number = #{chinaunicomBossNumber,jdbcType=VARCHAR},
+      ChinaUnicom_relay_number = #{chinaunicomRelayNumber,jdbcType=VARCHAR},
+      ChinaTelecom_boss_number = #{chinatelecomBossNumber,jdbcType=VARCHAR},
+      ChinaTelecom_relay_number = #{chinatelecomRelayNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+   
+  
+   <!-- oss -->
+  
+   <sql id="sql_where">
+   	   <where>
+		<if test="enterpriseName!=null and enterpriseName !=''">
+		and u.enterprise_name like '%${enterpriseName}%'
+		</if>
+		<if test="uPhone!=null and uPhone !=''">
+		and u.u_phone = #{uPhone}
+		</if>
+		<if test="accountType!=null and accountType !=''">
+		and u.account_type = #{accountType}
+		</if>
+		</where>
+  </sql>
+  
+  <select id="selectALL" resultMap="BaseResultMap" parameterType="java.util.Map">
+     select
+     <include refid="Base_Column_List" />
+     from t_oss_account u
+	 <include refid="sql_where"/>
+	 order by u.create_time asc
+  </select>
+  <select id="selectALLPAGE" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+     <include refid="Base_Column_List" />
+     from t_oss_account u
+	 <include refid="sql_where"/>
+	 order by u.create_time desc
+	 limit ${begin},${end}
+  </select>
+  <!-- redis 初始化 -->
+  <select id="selectByLimit" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_oss_account
+    limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+  <!-- 根据adpterid分页查询企业信息 -->
+  <select id="selectEnterperiseByLimit" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_oss_account where adpter_id = #{adpterId} and account_type=2
+    limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectALLSize" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select 
+    count(id)
+    from t_oss_account u 
+   <include refid="sql_where" />
+  </select>
+  
+</mapper>
